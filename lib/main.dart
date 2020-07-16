@@ -1,5 +1,6 @@
 import 'package:daily_expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 main() => runApp(DailyExpensesApp());
 
@@ -33,7 +34,6 @@ class HomePage extends StatelessWidget {
           title: Text('Despesas Pessoais'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
@@ -44,43 +44,80 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Column(
-                children: _transactions.map((tr) {
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.deepPurpleAccent, width: 2)),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        tr.value.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.deepPurpleAccent),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          tr.title,
+              children: _transactions.map((tr) {
+                return Card(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.deepPurpleAccent, width: 2)),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'R\$ ${tr.value.toStringAsFixed(2)}',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.deepPurpleAccent),
                         ),
-                        Text(
-                          tr.date.toString(),
-                          style: TextStyle(color: Colors.grey.shade700),
-                        )
-                      ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            tr.title,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            DateFormat('d MMM y').format(tr.date),
+                            style: TextStyle(color: Colors.grey.shade700),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'Nome',
+                          labelStyle:
+                              TextStyle(color: Colors.deepPurpleAccent)),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'Valor (R\$)',
+                          labelStyle:
+                              TextStyle(color: Colors.deepPurpleAccent)),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          FloatingActionButton.extended(
+                            onPressed: () {},
+                            icon: Icon(Icons.add_circle),
+                            label: Text('Nova Transação'),
+                            backgroundColor: Colors.deepPurpleAccent,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
-              );
-            }).toList())
+              ),
+            )
           ],
         ));
   }
