@@ -12,17 +12,20 @@ class DailyExpensesApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  final titleController = TextEditingController();
+  final priceController = TextEditingController();
+
   final _transactions = [
     Transaction(
       id: '1',
       title: 'XBOX ONE X',
-      value: 3059.00,
+      price: 3059.00,
       date: DateTime.now(),
     ),
     Transaction(
       id: '2',
       title: 'TV SAMSUNG UHD 4K HDR 5"',
-      value: 2299.00,
+      price: 2299.00,
       date: DateTime.now(),
     )
   ];
@@ -56,7 +59,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.deepPurpleAccent, width: 2)),
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          'R\$ ${tr.value.toStringAsFixed(2)}',
+                          'R\$ ${tr.price.toStringAsFixed(2)}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -89,12 +92,14 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: titleController,
                       decoration: InputDecoration(
                           labelText: 'Nome',
                           labelStyle:
                               TextStyle(color: Colors.deepPurpleAccent)),
                     ),
                     TextField(
+                      controller: priceController,
                       decoration: InputDecoration(
                           labelText: 'Valor (R\$)',
                           labelStyle:
@@ -106,7 +111,10 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           FloatingActionButton.extended(
-                            onPressed: () {},
+                            onPressed: () {
+                              print(
+                                  'Nome: ${titleController.text} Preço: ${priceController.text}');
+                            },
                             icon: Icon(Icons.add_circle),
                             label: Text('Nova Transação'),
                             backgroundColor: Colors.deepPurpleAccent,
