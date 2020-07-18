@@ -18,18 +18,20 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Despesas Pessoais'),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              child: Card(
-                color: Colors.blueAccent,
-                child: Text('Gráfico'),
-                elevation: 5,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                child: Card(
+                  color: Colors.blueAccent,
+                  child: Text('Gráfico'),
+                  elevation: 5,
+                ),
               ),
-            ),
-            TransactionDb(),
-          ],
+              TransactionDb(),
+            ],
+          ),
         ));
   }
 }

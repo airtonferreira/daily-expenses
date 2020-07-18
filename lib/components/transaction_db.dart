@@ -23,7 +23,31 @@ class _TransactionDbState extends State<TransactionDb> {
       title: 'TV SAMSUNG UHD 4K HDR 5"',
       price: 2299.00,
       date: DateTime.now(),
-    )
+    ),
+    Transaction(
+      id: '3',
+      title: 'CONTA DE ÁGUA',
+      price: 3059.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '4',
+      title: 'CONTA DE ENERGIA',
+      price: 3059.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '5',
+      title: 'INTERNET',
+      price: 3059.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '6',
+      title: 'NETSHOES',
+      price: 3059.00,
+      date: DateTime.now(),
+    ),
   ];
 
   _addTransaction(String title, double price) {
@@ -42,8 +66,8 @@ class _TransactionDbState extends State<TransactionDb> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        TransactionForm(_addTransaction),
         TransactionList(_transactions),
-        TransactionForm(_addTransaction)
       ],
     );
   }
