@@ -41,7 +41,10 @@ class _TransactionDbState extends State<TransactionDb> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[TransactionList(_transactions), TransactionForm()],
+      children: <Widget>[
+        TransactionList(_transactions),
+        TransactionForm(_addTransaction)
+      ],
     );
   }
 }
