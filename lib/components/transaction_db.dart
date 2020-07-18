@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:daily_expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import '../components/transaction_form.dart';
@@ -23,6 +25,18 @@ class _TransactionDbState extends State<TransactionDb> {
       date: DateTime.now(),
     )
   ];
+
+  _addTransaction(String title, double price) {
+    final newTransaction = Transaction(
+        id: Random().nextDouble().toString(),
+        title: title,
+        price: price,
+        date: DateTime.now());
+
+    setState(() {
+      _transactions.add(newTransaction);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
