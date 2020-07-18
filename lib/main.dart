@@ -1,6 +1,8 @@
+import 'package:daily_expenses/components/transaction_list.dart';
 import 'package:daily_expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import 'components/transaction_form.dart';
 
 main() => runApp(DailyExpensesApp());
 
@@ -12,9 +14,6 @@ class DailyExpensesApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final titleController = TextEditingController();
-  final priceController = TextEditingController();
-
   final _transactions = [
     Transaction(
       id: '1',
@@ -46,86 +45,8 @@ class HomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            Column(
-              children: _transactions.map((tr) {
-                return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.deepPurpleAccent, width: 2)),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'R\$ ${tr.price.toStringAsFixed(2)}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.deepPurpleAccent),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            tr.title,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            DateFormat('d MMM y').format(tr.date),
-                            style: TextStyle(color: Colors.grey.shade700),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-            Card(
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: titleController,
-                      decoration: InputDecoration(
-                          labelText: 'Nome',
-                          labelStyle:
-                              TextStyle(color: Colors.deepPurpleAccent)),
-                    ),
-                    TextField(
-                      controller: priceController,
-                      decoration: InputDecoration(
-                          labelText: 'Valor (R\$)',
-                          labelStyle:
-                              TextStyle(color: Colors.deepPurpleAccent)),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          FloatingActionButton.extended(
-                            onPressed: () {
-                              print(
-                                  'Nome: ${titleController.text} Preço: ${priceController.text}');
-                            },
-                            icon: Icon(Icons.add_circle),
-                            label: Text('Nova Transação'),
-                            backgroundColor: Colors.deepPurpleAccent,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
+            TransactionList(_transactions),
+            TransactionForm(),
           ],
         ));
   }
