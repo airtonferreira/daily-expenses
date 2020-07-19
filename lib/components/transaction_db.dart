@@ -30,24 +30,6 @@ class _TransactionDbState extends State<TransactionDb> {
       price: 3059.00,
       date: DateTime.now(),
     ),
-    Transaction(
-      id: '4',
-      title: 'CONTA DE ENERGIA',
-      price: 3059.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '5',
-      title: 'INTERNET',
-      price: 3059.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '6',
-      title: 'NETSHOES',
-      price: 3059.00,
-      date: DateTime.now(),
-    ),
   ];
 
   _addTransaction(String title, double price) {
