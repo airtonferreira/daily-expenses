@@ -53,17 +53,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // Column(
-  //             children: <Widget>[
-  //               TransactionForm(_addTransaction),
-  //             ],
-  //           )
-
   _openTransactionModal(BuildContext context) {
     showModalBottomSheet(
         context: context,
         builder: (_) {
-          return TransactionForm(null);
+          return TransactionForm(_addTransaction);
         });
   }
 
