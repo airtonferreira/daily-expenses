@@ -37,7 +37,7 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: titleController,
               decoration: InputDecoration(
                   labelText: 'Nome',
-                  labelStyle: TextStyle(color: Colors.deepPurpleAccent)),
+                  labelStyle: TextStyle(color: Theme.of(context).accentColor)),
               onSubmitted: (_) => _submitForm(),
             ),
             TextField(
@@ -45,7 +45,7 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: priceController,
               decoration: InputDecoration(
                   labelText: 'Valor (R\$)',
-                  labelStyle: TextStyle(color: Colors.deepPurpleAccent)),
+                  labelStyle: TextStyle(color: Theme.of(context).accentColor)),
               onSubmitted: (_) => _submitForm(),
             ),
             Container(
@@ -57,7 +57,7 @@ class _TransactionFormState extends State<TransactionForm> {
                     onPressed: _submitForm,
                     icon: Icon(Icons.add_circle),
                     label: Text('Nova Transação'),
-                    backgroundColor: Colors.deepPurpleAccent,
+                    backgroundColor: Theme.of(context).accentColor,
                   ),
                 ],
               ),

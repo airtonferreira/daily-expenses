@@ -10,7 +10,10 @@ main() => runApp(DailyExpensesApp());
 class DailyExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(
+      home: HomePage(),
+      theme: ThemeData(accentColor: Colors.deepPurpleAccent),
+    );
   }
 }
 
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Container(
               child: Card(
-                color: Colors.blueAccent,
+                color: Theme.of(context).accentColor,
                 child: Text('Gráfico'),
                 elevation: 5,
               ),
@@ -88,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: (() => _openTransactionModal(context)),
         icon: Icon(Icons.add_circle),
         label: Text('Nova Transação'),
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Theme.of(context).accentColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
