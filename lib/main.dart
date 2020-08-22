@@ -13,6 +13,7 @@ class DailyExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(accentColor: Colors.deepPurpleAccent),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -23,25 +24,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _transactions = [
-    Transaction(
-      id: '1',
-      title: 'XBOX ONE X',
-      price: 3059.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'TV SAMSUNG UHD 4K HDR 5"',
-      price: 2299.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '3',
-      title: 'CONTA DE ÁGUA',
-      price: 3059.00,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: '1',
+    //   title: 'XBOX ONE X',
+    //   price: 3059.00,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '2',
+    //   title: 'TV SAMSUNG UHD 4K HDR 5"',
+    //   price: 2299.00,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '3',
+    //   title: 'CONTA DE ÁGUA',
+    //   price: 3059.00,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransaction(String title, double price) {
