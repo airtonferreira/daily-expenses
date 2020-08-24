@@ -1,3 +1,4 @@
+import 'package:daily_expenses/components/chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/transaction_form.dart';
@@ -25,25 +26,34 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: '1',
-    //   title: 'XBOX ONE X',
-    //   price: 3059.00,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '2',
-    //   title: 'TV SAMSUNG UHD 4K HDR 5"',
-    //   price: 2299.00,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '3',
-    //   title: 'CONTA DE ÁGUA',
-    //   price: 3059.00,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: '1',
+      title: 'XBOX ONE X',
+      price: 3059.00,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: '2',
+      title: 'TV SAMSUNG UHD 4K HDR 5"',
+      price: 2299.00,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
+    Transaction(
+      id: '3',
+      title: 'Cadeira Gamer DXRacer',
+      price: 1890.00,
+      date: DateTime.now().subtract(Duration(days: 33)),
+    ),
   ];
+
+  List<Transaction> get recentTransactions {
+    return _transactions
+        .where(
+            (transaction) => transaction.date.isAfter(DateTime.now().subtract(
+                  Duration(days: 7),
+                )))
+        .toList();
+  }
 
   _addTransaction(String title, double price) {
     final newTransaction = Transaction(
@@ -77,13 +87,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              child: Card(
-                color: Theme.of(context).accentColor,
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(recentTransactions),
             TransactionList(_transactions),
           ],
         ),
