@@ -31,20 +31,31 @@ class Chart extends StatelessWidget {
     });
   }
 
+  double get _weekTotalValue {
+    return groupedTransactions.fold(
+        0.0, (sum, itemTransaction) => sum + itemTransaction['price']);
+  }
+
   @override
   Widget build(BuildContext context) {
-    groupedTransactions;
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactions
-            .map((tr) => ChartBar(
-                  label: tr['day'],
-                  price: tr['price'],
-                  percentage: 0,
-                ))
-            .toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions
+              .map((tr) => Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBar(
+                      label: tr['day'],
+                      price: tr['price'],
+                      percentage: (tr['price'] as double) / _weekTotalValue,
+                    ),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }
