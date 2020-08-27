@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Despesas Pessoais'),
+        backgroundColor: Theme.of(context).accentColor,
       ),
       body: SingleChildScrollView(
         child: Column(
