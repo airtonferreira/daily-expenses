@@ -1,6 +1,7 @@
 import 'package:daily_expenses/components/chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
@@ -11,6 +12,8 @@ main() => runApp(DailyExpensesApp());
 class DailyExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(accentColor: Colors.deepPurpleAccent),
@@ -73,17 +76,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Despesas Pessoais'),
-        backgroundColor: Theme.of(context).accentColor,
+    final appBar = AppBar(
+      title: Text(
+        'Despesas Pessoais',
+        style: TextStyle(fontSize: 20 * MediaQuery.of(context).textScaleFactor),
       ),
+      backgroundColor: Theme.of(context).accentColor,
+    );
+
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(recentTransactions),
-            TransactionList(_transactions, _deleteTransaction),
+            Container(
+                height: availableHeight * 0.3,
+                child: Chart(
+                  recentTransactions,
+                )),
+            Container(
+                height: availableHeight * 0.7,
+                child: TransactionList(
+                  _transactions,
+                  _deleteTransaction,
+                )),
           ],
         ),
       ),
